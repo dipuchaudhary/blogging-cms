@@ -17,14 +17,14 @@
 
                <div class="form-group">
                    <label for="content">Content</label>
-                   <input id="content" type="hidden" name="content">
-                   <trix-editor input="content"></trix-editor>
+                   <input id="description" type="hidden" name="content">
+                   <trix-editor input="description"></trix-editor>
                </div>
 
                <div class="form-group">
                    <label for="category">Category</label>
-                   <select name="category_id[]" id="category_id" class="form-control category_select" multiple>
-                       <option value="" disabled>---select category---</option>
+                   <select name="category_id" id="category_id" class="form-control">
+                       <option value="" disabled selected>---select category---</option>
                        @foreach($categories as $category)
                        <option value="{{$category->id}}">{{$category->name}}</option>
                            @endforeach
@@ -48,11 +48,11 @@
     @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.category_select').select2();
-        });
-    </script>
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $('.category_select').select2();--}}
+{{--        });--}}
+{{--    </script>--}}
     @endsection

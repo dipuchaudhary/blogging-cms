@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Requests\CreatePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostsController extends Controller
 {
@@ -16,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return  view('admin.post.index');
+        return  view('admin.post.index')->with('posts',Post::all());
     }
 
     /**
@@ -37,16 +38,18 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        dd($request->all());
+//        dd($request->all());
         //upload image
         $image = $request->featured_img->store('posts');
+
         $post = Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category' => $request->category_id,
-            'featured_img' => $image
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'category_id' => $request->input('category_id'),
+            'featured_img' => $image,
         ]);
 
+        Session::flash('success','post created successfully');
         return redirect(route('posts.index'));
 
     }
