@@ -27,6 +27,12 @@ class PostsController extends Controller
      */
     public function create()
     {
+        if(Category::all()->count() == 0){
+            Session::flash('info','You must have a category before you create a post');
+
+            return redirect()->back();
+        }
+
         return view('admin.post.create')->with('categories',Category::all());
     }
 
@@ -47,6 +53,7 @@ class PostsController extends Controller
             'content' => $request->input('content'),
             'category_id' => $request->input('category_id'),
             'featured_img' => $image,
+            'slug' => str_slug($request->title,'-')
         ]);
 
         Session::flash('success','post created successfully');
