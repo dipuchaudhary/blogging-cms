@@ -80,7 +80,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findorfail($id);
+        return view('admin.post.edit')->with('post',$post)->with('categories',Category::pluck('name','id'));
     }
 
     /**
@@ -92,7 +93,26 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+           'title' => 'required',
+           'content' => 'required',
+           'category_id' => 'required',
+        ]);
+
+        $post = Post::findorfail($id);
+
+        if($request->hasFile('featured_img')){
+            $image = $request->featured_img->store('posts');
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->input('content'),
+            'category_id' => $request->category_id
+        ]);
+
+        Session::flash('success','post updated successfully');
+        return redirect(route('posts.index'));
     }
 
     /**
