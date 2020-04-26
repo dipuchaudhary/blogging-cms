@@ -89,6 +89,11 @@
                             <li class="list-group-item"><a href="{{route('posts.index')}}">Posts</a></li>
                             <li class="list-group-item"><a href="{{ route('category.index') }}">Category</a></li>
                         </ul>
+                        <div class="mt-4">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="{{route('posts.trashed')}}">Trashed posts</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-md-9">
                         @yield('content')
@@ -116,7 +121,7 @@
             "preventDuplicates": false,
             "showDuration": "300",
             "hideDuration": "1000",
-            "timeOut": "5000",
+            "timeOut": "3000",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
             "hideEasing": "linear",

@@ -25,6 +25,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::resource('posts','PostsController');
 
     Route::resource('category','CategoryController');
+
+    Route::get('trashed-posts','PostsController@trashed')->name('posts.trashed');
+
+    Route::get('restore-posts/{post}','PostsController@restore')->name('restore-post');
 });
 
 

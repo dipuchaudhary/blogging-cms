@@ -103,6 +103,31 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::withTrashed()->where('id',$id)->firstOrFail();
+        if ($post->trashed()){
+            $post->deleteImage();
+            $post->forceDelete();
+            Session::flash('success','post deleted permanently');
+        }
+        else{
+            $post->delete();
+            Session::flash('success','post trashed successfully');
+        }
+
+         return  redirect()->back();
+    }
+
+    public function trashed(){
+        $posts = Post::onlyTrashed()->get();
+        return view('admin.post.trash')->with('posts',$posts);
+    }
+
+    public function restore($id){
+        $post = Post::withTrashed()->where('id',$id)->firstOrFail();
+        if($post->trashed()){
+            $post->restore();
+        }
+        Session::flash('success','post restored successfully');
+        return redirect()->back();
     }
 }
