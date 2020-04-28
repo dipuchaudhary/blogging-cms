@@ -86,6 +86,7 @@
                     <div class="col-md-3">
                         <ul class="list-group">
                             <li class="list-group-item"><a href="{{route('home')}}">Home</a></li>
+                            <li class="list-group-item"><a href="{{route('users.index')}}">Users</a></li>
                             <li class="list-group-item"><a href="{{route('posts.index')}}">Posts</a></li>
                             <li class="list-group-item"><a href="{{ route('category.index') }}">Category</a></li>
                             <li class="list-group-item"><a href="{{ route('tags.index') }}">Tags</a></li>

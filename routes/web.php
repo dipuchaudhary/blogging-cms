@@ -31,6 +31,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('restore-posts/{post}','PostsController@restore')->name('restore-post');
 
     Route::resource('tags','TagController');
+
+    Route::resource('users','UsersController');
+
+    Route::get('users/admin/{id}','UsersController@makeAdmin')->name('users.admin');
+
+    Route::get('users/not-admin/{id}','UsersController@notAdmin')->name('users.not.admin');
 });
 
 
