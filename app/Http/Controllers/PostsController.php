@@ -83,7 +83,7 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::findorfail($id);
-        return view('admin.post.edit')->with('post',$post)->with('categories',Category::pluck('name','id'));
+        return view('admin.post.edit')->with('post',$post)->with('categories',Category::pluck('name','id'))->with('tags',Tag::all());
     }
 
     /**
@@ -112,6 +112,8 @@ class PostsController extends Controller
             'content' => $request->input('content'),
             'category_id' => $request->category_id
         ]);
+
+        $post->tags()->sync($request->tags);
 
         Session::flash('success','post updated successfully');
         return redirect(route('posts.index'));

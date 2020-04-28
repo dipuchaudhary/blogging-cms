@@ -27,7 +27,26 @@
                     <select name="category_id" id="category_id" class="form-control">
                         <option value="" disabled>---select category---</option>
                         @foreach($categories as $key => $value)
-                            <option value="{{$key}}">{{$value}}</option>
+                            <option value="{{$key}}"
+                            @if($post->category->id == $key)
+                                selected
+                                @endif
+                            >{{$value}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <select name="tags[]" class="form-control tags" multiple>
+                        @foreach($tags as $tag)
+                            <option value="{{$tag->id}}"
+                            @foreach($post->tags as $t)
+                                @if($tag->id == $t->id)
+                                    selected
+                                    @endif
+                                @endforeach
+                            >{{$tag->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -54,11 +73,11 @@
 @endsection
 
 @section('script')
-    {{--    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>--}}
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
-    {{--    <script>--}}
-    {{--        $(document).ready(function() {--}}
-    {{--            $('.category_select').select2();--}}
-    {{--        });--}}
-    {{--    </script>--}}
+        <script>
+            $(document).ready(function() {
+                $('.tags').select2();
+            });
+        </script>
 @endsection
