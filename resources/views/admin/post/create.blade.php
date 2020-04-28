@@ -32,6 +32,15 @@
                </div>
 
                <div class="form-group">
+                   <label for="tags">Tags</label>
+                   <select name="tags[]" class="form-control tags" multiple>
+                       @foreach($tags as $tag)
+                           <option value="{{$tag->id}}">{{$tag->name}}</option>
+                           @endforeach
+                   </select>
+               </div>
+
+               <div class="form-group">
                    <label for="featured_img">Featured Image</label>
                    <input type="file" name="featured_img" id="featured_img" class="form-control-file">
                </div>
@@ -48,11 +57,11 @@
     @endsection
 
 @section('script')
-{{--    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>--}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js"></script>
-{{--    <script>--}}
-{{--        $(document).ready(function() {--}}
-{{--            $('.category_select').select2();--}}
-{{--        });--}}
-{{--    </script>--}}
+    <script>
+        $(document).ready(function() {
+            $('.tags').select2();
+        });
+    </script>
     @endsection

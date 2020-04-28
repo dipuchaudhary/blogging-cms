@@ -14,7 +14,7 @@
                 <th>Action</th>
                 </thead>
                 <tbody>
-                @foreach($categories as $category)
+                @forelse($categories as $category)
                 <tr>
                     <td>{{$category->name}}</td>
                     <td>
@@ -28,7 +28,11 @@
                         </form>
                     </td>
                 </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center">No category yet.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
 
             </table>

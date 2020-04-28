@@ -14,7 +14,7 @@
                 <th>Action</th>
                 </thead>
                 <tbody>
-                @foreach($posts as $post)
+                @forelse($posts as $post)
                     <tr>
                         <td><img src="{{ asset('storage/'.$post->featured_img) }}" alt="" width="100px" height="60px"></td>
                         <td>{{$post->title}}</td>
@@ -30,7 +30,11 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="4" class="text-center">No trash post found.</td>
+                    </tr>
+                @endforelse
                 </tbody>
 
             </table>

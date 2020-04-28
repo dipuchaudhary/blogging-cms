@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\CreatePostRequest;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -33,7 +34,7 @@ class PostsController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.post.create')->with('categories',Category::all());
+        return view('admin.post.create')->with('categories',Category::all())->with('tags',Tag::all());
     }
 
     /**
@@ -56,6 +57,7 @@ class PostsController extends Controller
             'slug' => str_slug($request->title,'-')
         ]);
 
+        $post->tags()->attach($request->tags);
         Session::flash('success','post created successfully');
         return redirect(route('posts.index'));
 
