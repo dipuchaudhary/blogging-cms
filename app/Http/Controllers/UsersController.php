@@ -106,7 +106,13 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findorfail($id);
+        $user->profile->delete();
+        $user->delete();
+
+        Session::flash('success','user deleted successfully');
+
+        return redirect()->back();
     }
 
     public function makeAdmin($id){

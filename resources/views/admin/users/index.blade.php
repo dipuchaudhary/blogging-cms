@@ -29,14 +29,13 @@
                                 @endif
                         </td>
                         <td>
-                            <a href="{{ route('users.edit',$user->id) }}" class="btn btn-info btn-sm">Edit</a>
-                        </td>
-                        <td>
-                            <form action="{{ route('users.destroy',$user->id) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">Trash</button>
-                            </form>
+                            @if(Auth::id()!=$user->id)
+                                <form action="{{ route('users.destroy',$user->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                                @endif
                         </td>
                     </tr>
                 @empty
