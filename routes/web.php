@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index');
 
 Auth::routes();
 
@@ -41,6 +39,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('user/profile','ProfileController@index')->name('user.profile');
 
     Route::post('users/profile/update','ProfileController@update')->name('user.profile.update');
+
+    Route::get('settings','SiteSettingController@index')->name('setting.index');
+
+    Route::post('settings/update','SiteSettingController@update')->name('setting.update');
 });
 
 

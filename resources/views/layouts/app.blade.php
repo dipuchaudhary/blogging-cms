@@ -99,6 +99,9 @@
                         <div class="mt-4">
                             <ul class="list-group">
                                 <li class="list-group-item"><a href="{{route('posts.trashed')}}">Trashed posts</a></li>
+                                @if(auth()->user()->role=='admin')
+                                    <li class="list-group-item"><a href="{{route('setting.index')}}">Settings</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
