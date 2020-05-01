@@ -6,13 +6,13 @@ use App\Category;
 use App\Post;
 use App\SiteSetting;
 use App\Tag;
-use DemeterChain\C;
 
 class FrontController extends Controller
 {
     public function index(){
 
-        return view('index')->with('categories',Category::all()->take(5))
+        return view('index')->with('title', SiteSetting::first()->site_name)
+                                  ->with('categories',Category::all()->take(5))
                                   ->with('post', Post::latest()->first())
                                   ->with('second_posts', Post::orderBy('created_at','DESC')->skip(1)->take(2)->get())
                                   ->with('category',Category::find(1))
@@ -41,8 +41,21 @@ class FrontController extends Controller
         $category = Category::find($id);
 
         return view('category')->with('category',$category)
-                                    ->with('setting',SiteSetting::first())
-                                    ->with('categories',Category::all()->take(5))
-                                    ->with('tags',Tag::all());
+                                     ->with('title',$category->name)
+                                     ->with('setting',SiteSetting::first())
+                                     ->with('categories',Category::all()->take(5))
+                                     ->with('tags',Tag::all());
+    }
+
+    public function tag($id){
+
+        $tag = Tag::find($id);
+
+        return view('tag')->with('tag',$tag)
+                                ->with('title',$tag->name)
+                                 ->with('setting',SiteSetting::first())
+                                 ->with('categories',Category::all()->take(5))
+                                 ->with('tags',Tag::all());
+
     }
 }
