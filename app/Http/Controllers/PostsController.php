@@ -7,6 +7,7 @@ use App\Http\Requests\CreatePostRequest;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PostsController extends Controller
@@ -54,7 +55,8 @@ class PostsController extends Controller
             'content' => $request->input('content'),
             'category_id' => $request->input('category_id'),
             'featured_img' => $image,
-            'slug' => str_slug($request->title,'-')
+            'slug' => str_slug($request->title,'-'),
+            'user_id' => Auth::id()
         ]);
 
         $post->tags()->attach($request->tags);

@@ -11,7 +11,7 @@ class Post extends Model
     use softDeletes;
 
     protected $fillable = [
-        'title','content','category_id','featured_img','slug'
+        'title','content','category_id','featured_img','slug','user_id'
     ];
 
 //    //acessors to get the full path of image
@@ -31,5 +31,9 @@ class Post extends Model
 
     public function tags(){
         return $this->belongsToMany('App\Tag');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }
