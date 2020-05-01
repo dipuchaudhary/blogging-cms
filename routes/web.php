@@ -11,6 +11,9 @@
 |
 */
 
+
+
+
 Route::get('/', 'FrontController@index')->name('index');
 
 Route::get('/post/{slug}','FrontController@singlePost')->name('post.single');
@@ -18,6 +21,18 @@ Route::get('/post/{slug}','FrontController@singlePost')->name('post.single');
 Route::get('/category/{id}','FrontController@singleCategory')->name('category.single');
 
 Route::get('/tag/{id}','FrontController@tag')->name('tag.single');
+
+Route::get('/results',function (){
+
+    $posts = \App\Post::where('title','like','%'.request('query').'%')->get();
+
+    return view('result')->with('posts',$posts)
+                                ->with('title','Search results:'.request('query'))
+                                ->with('setting', \App\SiteSetting::first())
+                                ->with('categories',\App\Category::all()->take(5))
+                                 ->with('tags',\App\Tag::all())
+                                 ->with('query',request('query')) ;
+})->name('results');
 
 Auth::routes();
 
