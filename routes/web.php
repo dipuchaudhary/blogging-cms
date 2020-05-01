@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'FrontController@index');
+Route::get('/', 'FrontController@index')->name('index');
+
+Route::get('/post/{slug}','FrontController@singlePost')->name('post.single');
+
+Route::get('/category/{id}','FrontController@singleCategory')->name('category.single');
 
 Auth::routes();
 
@@ -43,6 +47,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('settings','SiteSettingController@index')->name('setting.index');
 
     Route::post('settings/update','SiteSettingController@update')->name('setting.update');
+
+
 });
 
 
